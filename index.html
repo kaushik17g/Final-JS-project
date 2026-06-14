@@ -7,6 +7,7 @@
 </head>
 <link rel ="stylesheet" href="style.css">
 <body>
+    <div class="container">
         <form id="userForm">
             <h3>User Registration</h3>
             <input type="text" id="name" name="name" placeholder="Enter  name"><br><br>
@@ -16,21 +17,24 @@
             <input type="text" id="description" name="description" placeholder="Enter description"><br><br>
             <h7>Upload Profile image</h7><br>
             <input type="file" accept="image/*" id="profilePic" placeholder="Upload profile image"><br><br>
-            <input type="submit" value="Submit">
+            <input type="submit" class="submit" value="Submit">
         </form>
     
-    <br><br>
 
     
         <form id="adminform">
             <h3>Admin Login</h3>
             <input type="text" id="empid" name="empid" placeholder="Enter Employee id"><br><br>
             <input type="password" id="password" name="password" placeholder="Enter password"><br><br>
-            <input type="submit" value="Submit">
+            <input type="submit"  class="submit" value="Submit"><br><br><br><br><br>
+            <p><b>Note:</b>Kindly Contact your oraganization for admin id and password</p>
+
         </form>
+    </div>
 
     <div id="cards"><br><br>
-        <h3>Users</h3>
+        <h3><center>Users</center></h3>
+        <input type ="search" id="searchUser" placeholder="search users"style="display:none";><br><br>
         <div id="userCards"></div>
 
 

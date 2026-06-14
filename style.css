@@ -1,7 +1,63 @@
+.container{
+    display:flex;
+    margin-top: 20px;
+}
+
 #userCards {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
+}
+
+#userForm {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #b3b3b3;
+    border-radius: 8px;
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.1);
+}
+
+#userForm input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #524c4c;
+    border-radius: 6px;
+    
+}
+
+#userForm input:hover{
+    transform: scale(1.03);
+    transition: transform 0.2s ease;
+
+}
+
+#adminform{
+    width: 300px;
+    height: auto;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #b3b3b3;
+    border-radius: 8px;
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.1);
+}
+
+#adminform input{
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #524c4c;
+    border-radius: 6px;
+
+}
+
+.submit{
+    background-color: #c3bebe;
+}
+
+.submit:hover{
+    background-color: rgb(88, 161, 221);
 }
 
 .card {
@@ -49,7 +105,7 @@
 .remove-btn {
     margin-top: 8px;
     padding: 4px 12px;
-    background: #d9534f;
+    background: #838080;
     color: white;
     border: none;
     border-radius: 6px;
@@ -57,5 +113,33 @@
 }
 
 .remove-btn:hover {
-    background: #c9302c;
+    background: #fa0000;
 }
+
+#adminform h3 {
+    text-align: center;
+}
+
+#userForm h3{
+    text-align: center;
+}
+
+#cards h3{
+    background-color: #b3b3b3;
+    padding: 10px;
+}
+
+#searchUser {
+    margin: auto;
+    width: 350px;
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#searchUser:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76, 175, 80,
