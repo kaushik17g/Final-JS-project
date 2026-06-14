@@ -1,7 +1,8 @@
 
 let users = document.querySelector("#userForm");
-let input = document.querySelectorAll("#userForm input");
-let adminallUsers = []
+let userinput = document.querySelectorAll("#userForm input");
+let allUsers = [];
+let isAdmin =false;
 
 
 users.addEventListener("submit", function(dets){
@@ -10,26 +11,33 @@ users.addEventListener("submit", function(dets){
     let currUsers = []
 
 
-    let Username = input[0].value;
-    let Age = input[1].value;
-    let Role = input[2].value;
-    let Email = input[3].value;
-    let Desc = input[4].value;
-    let profileimg = input[5].files[0];
+    let Username = userinput[0].value;
+    let Age = userinput[1].value;
+    let Role = userinput[2].value;
+    let Email = userinput[3].value;
+    let Desc = userinput[4].value;
+    let profileimg = userinput[5].files[0];
+    let imgURL = profileimg ? URL.createObjectURL(profileimg) : "";
+
 
     if(!Username||!Role||!Age||!Email||!Desc){
         alert("Fill All Details")
     }
     else{
-        adminallUsers.push({Username,Age,Role,Email,Desc,profileimg})
-        currUsers.push({Username,Age,Role,Email,Desc,profileimg})
+        allUsers.push({Username,Age,Role,Email,Desc,profileimg:imgURL})
+        currUsers.push({Username,Age,Role,Email,Desc,profileimg:imgURL})
     }
-    CreateCards(adminallUsers[adminallUsers.length - 1]);
+    alert("USer Registration Successful")
+    document.getElementById("userCards").innerHTML = "";
+
+    CreateCards(currUsers[0]);
+
     console.log(currUsers);
-    console.log(adminallUsers); 
+    console.log(allUsers); 
 });
 
 
+//creating the cards
 function CreateCards(user){
     let card = document.createElement("div");
     card.classList.add("card");
@@ -38,7 +46,7 @@ function CreateCards(user){
     profile.classList.add("profile");
 
     let img = document.createElement("img");
-    img.setAttribute("src","https://images.unsplash.com/photo-1780510381141-f974c134f75c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHx0b3BpYy1mZWVkfDR8dG93SlpGc2twR2d8fGVufDB8fHx8fA%3D%3D");
+    img.setAttribute("src",user.profileimg);
 
     let h2 = document.createElement("h2");
     h2.textContent= user.Username;
@@ -63,7 +71,62 @@ function CreateCards(user){
     card.appendChild(h5);
     card.appendChild(p);
 
-    document.getElementById("userCards").appendChild(card);}
+    if(isAdmin){
+        let removeBtn =document.createElement("button")
+        removeBtn.textContent="Remove User";
+        removeBtn.classList.add("remove-btn");
+
+        removeBtn.addEventListener("click", function(){
+            allUsers = allUsers.filter(function(u){
+                return u !== user;
+        });
+        card.remove();
+    });
+    card.appendChild(removeBtn);
+    }
+    document.getElementById("userCards").appendChild(card);
+}
+
+//for admin login
+
+let admin = document.querySelector("#adminform");
+let admininput =document.querySelectorAll("#adminform input");
+
+
+admin.addEventListener("submit", function(dets){
+dets.preventDefault();
+
+let adminid = admininput[0].value;
+let adminpassword = admininput[1].value;
+
+if(adminid == 9353 && adminpassword == 12345)
+{ 
+    alert("Admin Login Succesful");
+    isAdmin=true;
+    adminrights();
+}
+else{
+    alert("Wrong admin id or password")
+}
+
+console.log(allUsers);
+
+});
+
+
+//admin rights
+function adminrights(){
+    document.getElementById("userCards").innerHTML = "";
+
+    allUsers.forEach(function(user){
+        CreateCards(user);
+    });
+    
+
+}
+
+
+
 
 
 

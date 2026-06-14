@@ -45,3 +45,17 @@
     font-size: 13px;
     color: #777;
 }
+
+.remove-btn {
+    margin-top: 8px;
+    padding: 4px 12px;
+    background: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.remove-btn:hover {
+    background: #c9302c;
+}
