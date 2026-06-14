@@ -82,6 +82,29 @@ function CreateCards(user) {
 
       card.remove();
     });
+    let editBtn = document.createElement("button");
+    editBtn.textContent = "Edit User";
+    editBtn.classList.add("edit-btn");
+
+    editBtn.addEventListener("click", function () {
+      let newUsername = prompt("Edit Username:", user.Username);
+      let newAge = prompt("Edit Age:", user.Age);
+      let newRole = prompt("Edit Role:", user.Role);
+      let newEmail = prompt("Edit Email:", user.Email);
+      let newDesc = prompt("Edit Description:", user.Desc);
+
+      if (newUsername !== null && newUsername.trim() !== "")
+        user.Username = newUsername;
+      if (newAge !== null && newAge.trim() !== "") user.Age = newAge;
+      if (newRole !== null && newRole.trim() !== "") user.Role = newRole;
+      if (newEmail !== null && newEmail.trim() !== "") user.Email = newEmail;
+      if (newDesc !== null && newDesc.trim() !== "") user.Desc = newDesc;
+
+      localStorage.setItem("allUsers", JSON.stringify(allUsers));
+      adminrights(); // re-render all cards with updated data
+    });
+    card.appendChild(editBtn);
+
     card.appendChild(removeBtn);
   }
   document.getElementById("userCards").appendChild(card);

@@ -142,4 +142,20 @@
 
 #searchUser:focus {
     border-color: #4CAF50;
-    box-shadow: 0 0 5px rgba(76, 175, 80,
+    box-shadow: 0 0 5px rgba(76, 175, 80);
+}
+
+.edit-btn {
+    margin-top: 8px;
+    margin-right: 6px;
+    padding: 4px 12px;
+    background: #f0ad4e;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.edit-btn:hover {
+    background: #ec971f;
+}
