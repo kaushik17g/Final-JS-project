@@ -19,6 +19,9 @@ users.addEventListener("submit", function (dets) {
 
   if (!Username || !Role || !Age || !Email || !Desc) {
     alert("Fill All Details");
+  } else if (allUsers.some((u) => u.Email === Email)) {
+    alert("Email already registered");
+    return;
   } else {
     allUsers.push({ Username, Age, Role, Email, Desc, profileimg: imgURL });
     currUsers.push({ Username, Age, Role, Email, Desc, profileimg: imgURL });
@@ -79,6 +82,7 @@ function CreateCards(user) {
         return u !== user;
       });
       localStorage.setItem("allUsers", JSON.stringify(allUsers));
+      updateUserCount();
 
       card.remove();
     });
@@ -112,6 +116,7 @@ admin.addEventListener("submit", function (dets) {
 });
 
 //admin rights
+
 function adminrights() {
   document.getElementById("userCards").innerHTML = "";
 
@@ -119,7 +124,8 @@ function adminrights() {
     CreateCards(user);
   });
   usersearch.style.display = "block";
-  search();
+
+  updateUserCount();
 }
 
 usersearch.addEventListener("input", function () {
@@ -130,3 +136,9 @@ usersearch.addEventListener("input", function () {
   document.getElementById("userCards").innerHTML = "";
   filtered.forEach((user) => CreateCards(user));
 });
+
+function updateUserCount() {
+  document.getElementById(
+    "userCount"
+  ).textContent = `Total Users: ${allUsers.length}`;
+}
