@@ -1,7 +1,7 @@
 
 let users = document.querySelector("#userForm");
 let userinput = document.querySelectorAll("#userForm input");
-let allUsers = [];
+let allUsers = JSON.parse(localStorage.getItem("allUsers")) || [];
 let isAdmin =false;
 
 
@@ -26,14 +26,18 @@ users.addEventListener("submit", function(dets){
     else{
         allUsers.push({Username,Age,Role,Email,Desc,profileimg:imgURL})
         currUsers.push({Username,Age,Role,Email,Desc,profileimg:imgURL})
-    }
-    alert("USer Registration Successful")
+
+        localStorage.setItem("allUsers", JSON.stringify(allUsers));
+
+    
+    alert("User Registration Successful")
     document.getElementById("userCards").innerHTML = "";
 
     CreateCards(currUsers[0]);
 
     console.log(currUsers);
     console.log(allUsers); 
+    }
 });
 
 
@@ -80,6 +84,8 @@ function CreateCards(user){
             allUsers = allUsers.filter(function(u){
                 return u !== user;
         });
+        localStorage.setItem("allUsers", JSON.stringify(allUsers));
+
         card.remove();
     });
     card.appendChild(removeBtn);
@@ -108,6 +114,7 @@ if(adminid == 9353 && adminpassword == 12345)
 else{
     alert("Wrong admin id or password")
 }
+admin.reset();
 
 console.log(allUsers);
 
