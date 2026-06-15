@@ -4,6 +4,7 @@ let allUsers = JSON.parse(localStorage.getItem("allUsers")) || [];
 let isAdmin = false;
 let usersearch = document.querySelector("#searchUser");
 let h3 = document.querySelector("#h3");
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 users.addEventListener("submit", async function (dets) {
   dets.preventDefault();
@@ -17,15 +18,27 @@ users.addEventListener("submit", async function (dets) {
   let Desc = userinput[4].value;
   let profileimg = userinput[5].files[0];
   let imgURL = "";
+
   if (profileimg) {
-    imgURL = await new Promise((resolve) => {
-      let reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.readAsDataURL(profileimg);
-    });
+    try {
+      imgURL = await new Promise((resolve, reject) => {
+        let reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(reader.error);
+        reader.readAsDataURL(profileimg);
+      });
+    } catch (err) {
+      console.error("Image read failed:", err);
+      alert("Could not read the image file");
+      imgURL = "";
+    }
   }
+
   if (!Username || !Role || !Age || !Email || !Desc) {
     alert("Fill All Details");
+  } else if (!emailRegex.test(Email)) {
+    alert("Enter a valid email");
+    return;
   } else if (allUsers.some((u) => u.Email === Email)) {
     alert("Email already registered");
     return;
@@ -39,6 +52,7 @@ users.addEventListener("submit", async function (dets) {
     localStorage.setItem("allUsers", JSON.stringify(allUsers));
 
     alert("User Registration Successful");
+    users.reset();
     document.getElementById("userCards").innerHTML = "";
 
     CreateCards(currUsers[0]);
