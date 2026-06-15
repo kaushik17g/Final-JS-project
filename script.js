@@ -3,8 +3,9 @@ let userinput = document.querySelectorAll("#userForm input");
 let allUsers = JSON.parse(localStorage.getItem("allUsers")) || [];
 let isAdmin = false;
 let usersearch = document.querySelector("#searchUser");
+let h3 = document.querySelector("#h3");
 
-users.addEventListener("submit", function (dets) {
+users.addEventListener("submit", async function (dets) {
   dets.preventDefault();
 
   let currUsers = [];
@@ -15,12 +16,21 @@ users.addEventListener("submit", function (dets) {
   let Email = userinput[3].value;
   let Desc = userinput[4].value;
   let profileimg = userinput[5].files[0];
-  let imgURL = profileimg ? URL.createObjectURL(profileimg) : "";
-
+  let imgURL = "";
+  if (profileimg) {
+    imgURL = await new Promise((resolve) => {
+      let reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.readAsDataURL(profileimg);
+    });
+  }
   if (!Username || !Role || !Age || !Email || !Desc) {
     alert("Fill All Details");
   } else if (allUsers.some((u) => u.Email === Email)) {
     alert("Email already registered");
+    return;
+  } else if (Age < 18) {
+    alert("Your not Eligible");
     return;
   } else {
     allUsers.push({ Username, Age, Role, Email, Desc, profileimg: imgURL });
@@ -79,7 +89,7 @@ function CreateCards(user) {
 
     removeBtn.addEventListener("click", function () {
       allUsers = allUsers.filter(function (u) {
-        return u !== user;
+        return u.Email !== user.Email;
       });
       localStorage.setItem("allUsers", JSON.stringify(allUsers));
       updateUserCount();
@@ -119,6 +129,8 @@ admin.addEventListener("submit", function (dets) {
 
 function adminrights() {
   document.getElementById("userCards").innerHTML = "";
+
+  h3.textContent = "Registered Users";
 
   allUsers.forEach(function (user) {
     CreateCards(user);
