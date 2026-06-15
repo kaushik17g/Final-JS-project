@@ -154,14 +154,27 @@ function adminrights() {
   updateUserCount();
 }
 
-usersearch.addEventListener("input", function () {
-  let term = usersearch.value.toLowerCase();
-  let filtered = allUsers.filter((u) =>
-    u.Username.toLowerCase().includes(term)
-  );
-  document.getElementById("userCards").innerHTML = "";
-  filtered.forEach((user) => CreateCards(user));
-});
+function debounce(fn, delay) {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn(...args);
+    }, delay);
+  };
+}
+
+usersearch.addEventListener(
+  "input",
+  debounce(function () {
+    let term = usersearch.value.toLowerCase();
+    let filtered = allUsers.filter((u) =>
+      u.Username.toLowerCase().includes(term)
+    );
+    document.getElementById("userCards").innerHTML = "";
+    filtered.forEach((user) => CreateCards(user));
+  }, 700)
+);
 
 function updateUserCount() {
   document.getElementById(
