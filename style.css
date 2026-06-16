@@ -65,11 +65,11 @@ body{
 
 }
 
-.submit{
+.submitBtn {
     background-color: #c3bebe;
 }
 
-.submit:hover{
+.submitBtn:hover{
     background-color: rgb(88, 161, 221);
 }
 
@@ -199,4 +199,61 @@ h1{
 
 .edit-btn:hover {
     background: #ec971f;
+}
+
+.btn-wrapper {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 8px;
+  }
+
+  #submitBtn {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #c3bebe;
+    color: #000000;
+    font-size: 14px;
+}
+
+#submitBtn:hover {
+    background-color: rgb(88, 161, 221);
+    color: white;
+}
+
+#adminform button {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #c3bebe;
+    color: #000000;
+    font-size: 14px;
+}
+
+#adminform button:hover {
+    background-color: rgb(88, 161, 221);
+    color: white;
+}
+
+#userForm.highlight {
+    border: 2px solid #4CAF50;
+    box-shadow: 0 0 15px rgba(76, 175, 80, 0.8);
+    transition: all 0.3s ease;
+}
+
+@keyframes shake {
+    0%   { transform: translateX(0); }
+    25%  { transform: translateX(-6px); }
+    50%  { transform: translateX(6px); }
+    75%  { transform: translateX(-6px); }
+    100% { transform: translateX(0); }
+}
+
+#userForm.shake {
+    animation: shake 0.4s ease;
 }
