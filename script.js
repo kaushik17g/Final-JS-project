@@ -6,6 +6,8 @@ let usersearch = document.querySelector("#searchUser");
 let h3 = document.querySelector("#h3");
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+//user submit
+
 users.addEventListener("submit", async function (dets) {
   dets.preventDefault();
 
@@ -56,9 +58,6 @@ users.addEventListener("submit", async function (dets) {
     document.getElementById("userCards").innerHTML = "";
 
     CreateCards(currUsers[0]);
-
-    console.log(currUsers);
-    console.log(allUsers);
   }
 });
 
